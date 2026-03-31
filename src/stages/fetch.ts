@@ -53,15 +53,9 @@ export async function fetchRepo(
   if (repoInfo.isGitHub) {
     try {
       if (verbose) console.log(`Downloading tarball from GitHub API...`);
-      return await downloadTarball(
-        repoInfo,
-        branch ?? "main",
-        tempDir,
-        token
-      );
-    } catch (err) {
-      if (verbose)
-        console.log(`GitHub API failed, falling back to git clone...`);
+      return await downloadTarball(repoInfo, branch ?? "main", tempDir, token);
+    } catch {
+      if (verbose) console.log(`GitHub API failed, falling back to git clone...`);
     }
   }
 
