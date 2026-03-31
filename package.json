@@ -1,0 +1,36 @@
+{
+  "name": "git2epub",
+  "version": "0.1.0",
+  "description": "Convert GitHub-hosted markdown books to EPUB/PDF",
+  "type": "module",
+  "bin": {
+    "git2epub": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node dist/cli.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "commander": "^14.0.3",
+    "epub-gen-memory": "^1.1.2",
+    "js-yaml": "^4.1.1",
+    "node-fetch": "^3.3.2",
+    "rehype-highlight": "^7.0.2",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "sharp": "^0.34.5",
+    "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  }
+}
