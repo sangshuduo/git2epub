@@ -76,6 +76,19 @@ export function buildEpubOptions(
   };
 }
 
+function embedImagesAsDataUris(
+  html: string,
+  images: readonly ProcessedImage[]
+): string {
+  let result = html;
+  for (const img of images) {
+    const base64 = img.data.toString("base64");
+    const dataUri = `data:${img.mimeType};base64,${base64}`;
+    result = result.replaceAll(`src="${img.outputPath}"`, `src="${dataUri}"`);
+  }
+  return result;
+}
+
 export async function buildEpub(
   metadata: BookMetadata,
   chapters: readonly ParsedChapter[],
@@ -86,7 +99,7 @@ export async function buildEpub(
 
   const epubContent = options.content.map((c) => ({
     title: c.title,
-    content: c.data,
+    content: embedImagesAsDataUris(c.data, images),
   }));
 
   const epubBuffer = await new EPub(
@@ -96,6 +109,7 @@ export async function buildEpub(
       lang: options.lang,
       cover: options.cover,
       css: options.css,
+      ignoreFailedDownloads: true,
     },
     epubContent
   ).genEpub();

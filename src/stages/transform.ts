@@ -32,7 +32,7 @@ export async function transformChapters(
     const processed = await processImage(imageRef, keepSvg);
     if (processed) {
       processedImages.push(processed);
-      imageMap.set(imageRef.resolvedPath, processed.outputPath);
+      imageMap.set(imageRef.originalPath, processed.outputPath);
     }
   }
 
