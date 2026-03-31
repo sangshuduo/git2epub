@@ -17,9 +17,7 @@ export async function processImage(
     if (imageRef.isRemote) {
       const response = await fetch(imageRef.resolvedPath);
       if (!response.ok) {
-        console.warn(
-          `Warning: Failed to download image: ${imageRef.resolvedPath}`
-        );
+        console.warn(`Warning: Failed to download image: ${imageRef.resolvedPath}`);
         return null;
       }
       data = Buffer.from(await response.arrayBuffer());

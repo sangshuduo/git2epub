@@ -10,9 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 function getVersion(): string {
   try {
-    const pkg = JSON.parse(
-      readFileSync(join(__dirname, "..", "package.json"), "utf-8")
-    );
+    const pkg = JSON.parse(readFileSync(join(__dirname, "..", "package.json"), "utf-8"));
     return pkg.version ?? "0.0.0";
   } catch {
     return "0.0.0";
@@ -41,9 +39,7 @@ program
     try {
       const format = opts.format as "epub" | "pdf";
       if (format !== "epub" && format !== "pdf") {
-        console.error(
-          `Error: Invalid format "${opts.format}". Use "epub" or "pdf".`
-        );
+        console.error(`Error: Invalid format "${opts.format}". Use "epub" or "pdf".`);
         process.exit(1);
       }
 
@@ -61,9 +57,7 @@ program
         verbose: opts.verbose,
       });
     } catch (err) {
-      console.error(
-        `Error: ${err instanceof Error ? err.message : String(err)}`
-      );
+      console.error(`Error: ${err instanceof Error ? err.message : String(err)}`);
       process.exit(1);
     }
   });

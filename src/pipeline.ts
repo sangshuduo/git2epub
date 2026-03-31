@@ -6,20 +6,12 @@ import { buildEpub, buildPdf } from "./stages/build.js";
 import { basename } from "path";
 import type { CliOptions } from "./types.js";
 
-export async function runPipeline(
-  source: string,
-  options: CliOptions
-): Promise<void> {
+export async function runPipeline(source: string, options: CliOptions): Promise<void> {
   const verbose = options.verbose;
 
   // Stage 1: Fetch
   if (verbose) console.log("Stage 1/5: Fetching repository...");
-  const repoDir = await fetchRepo(
-    source,
-    options.branch,
-    options.token,
-    verbose
-  );
+  const repoDir = await fetchRepo(source, options.branch, options.token, verbose);
 
   // Stage 2: Discover
   if (verbose) console.log("Stage 2/5: Discovering chapters...");
@@ -51,23 +43,16 @@ export async function runPipeline(
 
   // Stage 4: Transform
   if (verbose) console.log("Stage 4/5: Transforming content...");
-  const { transformedChapters, images } = await transformChapters(
-    parsedChapters,
-    options.keepSvg
-  );
+  const { transformedChapters, images } = await transformChapters(parsedChapters, options.keepSvg);
 
   if (verbose) {
     console.log(`  Processed ${images.length} images`);
   }
 
   // Stage 5: Build
-  const defaultName = basename(source.replace(/\/$/, "")).replace(
-    /\.git$/,
-    ""
-  );
+  const defaultName = basename(source.replace(/\/$/, "")).replace(/\.git$/, "");
   const outputPath =
-    options.output ??
-    `${defaultName}.${options.format === "pdf" ? "pdf" : "epub"}`;
+    options.output ?? `${defaultName}.${options.format === "pdf" ? "pdf" : "epub"}`;
 
   if (options.format === "pdf") {
     if (verbose) console.log("Stage 5/5: Generating PDF...");

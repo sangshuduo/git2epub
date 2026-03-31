@@ -1,10 +1,7 @@
 import type { ParsedChapter, ProcessedImage, ImageRef } from "../types.js";
 import { processImage } from "../utils/images.js";
 
-export function replaceImagePaths(
-  html: string,
-  imageMap: ReadonlyMap<string, string>
-): string {
+export function replaceImagePaths(html: string, imageMap: ReadonlyMap<string, string>): string {
   let result = html;
   for (const [originalPath, newPath] of imageMap) {
     result = result.replaceAll(`src="${originalPath}"`, `src="${newPath}"`);

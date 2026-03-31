@@ -27,9 +27,7 @@ export async function downloadTarball(
 
   const response = await fetch(url, { headers, redirect: "follow" });
   if (!response.ok) {
-    throw new Error(
-      `GitHub API error: ${response.status} ${response.statusText}`
-    );
+    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
   }
 
   await mkdir(destDir, { recursive: true });
@@ -39,11 +37,7 @@ export async function downloadTarball(
     throw new Error("Empty response body from GitHub API");
   }
 
-  await pipeline(
-    body,
-    createGunzip(),
-    extract({ cwd: destDir, strip: 1 })
-  );
+  await pipeline(body, createGunzip(), extract({ cwd: destDir, strip: 1 }));
 
   return destDir;
 }

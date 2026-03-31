@@ -3,10 +3,7 @@ import { join } from "path";
 import yaml from "js-yaml";
 import type { BookConfig, CliOptions } from "./types.js";
 
-export async function loadConfigFile(
-  repoDir: string,
-  configPath?: string
-): Promise<BookConfig> {
+export async function loadConfigFile(repoDir: string, configPath?: string): Promise<BookConfig> {
   const filePath = configPath ?? join(repoDir, "git2epub.yaml");
   try {
     const content = await readFile(filePath, "utf-8");

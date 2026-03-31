@@ -17,8 +17,7 @@ describe("replaceImagePaths", () => {
   });
 
   it("handles multiple images in one chapter", () => {
-    const html =
-      '<img src="/repo/a.png" alt="a"><img src="/repo/b.jpg" alt="b">';
+    const html = '<img src="/repo/a.png" alt="a"><img src="/repo/b.jpg" alt="b">';
     const imageMap = new Map([
       ["/repo/a.png", "images/a.png"],
       ["/repo/b.jpg", "images/b.jpg"],

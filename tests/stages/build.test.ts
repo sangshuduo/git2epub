@@ -1,10 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { buildEpubOptions } from "../../src/stages/build.js";
-import type {
-  ParsedChapter,
-  BookMetadata,
-  ProcessedImage,
-} from "../../src/types.js";
+import type { ParsedChapter, BookMetadata, ProcessedImage } from "../../src/types.js";
 
 describe("buildEpubOptions", () => {
   it("creates valid epub options from chapters and metadata", () => {

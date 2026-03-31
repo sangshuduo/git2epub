@@ -3,11 +3,7 @@ import { promisify } from "util";
 
 const execFileAsync = promisify(execFile);
 
-export async function gitClone(
-  url: string,
-  destDir: string,
-  branch?: string
-): Promise<string> {
+export async function gitClone(url: string, destDir: string, branch?: string): Promise<string> {
   const args = ["clone", "--depth", "1"];
   if (branch) {
     args.push("--branch", branch);

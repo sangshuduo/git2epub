@@ -15,11 +15,8 @@ export async function parseChapter(chapter: Chapter): Promise<ParsedChapter> {
     .use(remarkParse)
     .use(() => (tree) => {
       visit(tree, "image", (node: { url: string }) => {
-        const isRemote =
-          node.url.startsWith("http://") || node.url.startsWith("https://");
-        const resolvedPath = isRemote
-          ? node.url
-          : resolve(chapterDir, node.url);
+        const isRemote = node.url.startsWith("http://") || node.url.startsWith("https://");
+        const resolvedPath = isRemote ? node.url : resolve(chapterDir, node.url);
         const isSvg = extname(node.url).toLowerCase() === ".svg";
 
         images.push({
@@ -46,9 +43,7 @@ export async function parseChapter(chapter: Chapter): Promise<ParsedChapter> {
   };
 }
 
-export async function parseAllChapters(
-  chapters: readonly Chapter[]
-): Promise<ParsedChapter[]> {
+export async function parseAllChapters(chapters: readonly Chapter[]): Promise<ParsedChapter[]> {
   const results: ParsedChapter[] = [];
   for (const chapter of chapters) {
     try {

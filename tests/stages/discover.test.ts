@@ -6,10 +6,7 @@ const fixturesDir = join(import.meta.dirname, "../fixtures");
 
 describe("discoverChapters", () => {
   it("discovers chapters from numbered files in directories", async () => {
-    const result = await discoverChapters(
-      join(fixturesDir, "numbered-book"),
-      {}
-    );
+    const result = await discoverChapters(join(fixturesDir, "numbered-book"), {});
     expect(result.chapters).toHaveLength(4);
     expect(result.chapters[0].title).toBe("Preface");
     expect(result.chapters[1].title).toBe("Introduction");
@@ -20,20 +17,14 @@ describe("discoverChapters", () => {
   });
 
   it("discovers chapters from SUMMARY.md", async () => {
-    const result = await discoverChapters(
-      join(fixturesDir, "summary-book"),
-      {}
-    );
+    const result = await discoverChapters(join(fixturesDir, "summary-book"), {});
     expect(result.chapters).toHaveLength(2);
     expect(result.chapters[0].title).toBe("Introduction");
     expect(result.chapters[1].title).toBe("Chapter One");
   });
 
   it("uses config file chapter order over auto-detect", async () => {
-    const result = await discoverChapters(
-      join(fixturesDir, "config-book"),
-      {}
-    );
+    const result = await discoverChapters(join(fixturesDir, "config-book"), {});
     expect(result.chapters).toHaveLength(2);
     expect(result.chapters[0].title).toBe("Second Chapter");
     expect(result.chapters[1].title).toBe("First Chapter");

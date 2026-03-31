@@ -1,10 +1,6 @@
 import { EPub } from "epub-gen-memory";
 import { writeFile } from "fs/promises";
-import type {
-  ParsedChapter,
-  BookMetadata,
-  ProcessedImage,
-} from "../types.js";
+import type { ParsedChapter, BookMetadata, ProcessedImage } from "../types.js";
 
 const HIGHLIGHT_CSS = `
 .hljs{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto}
@@ -76,10 +72,7 @@ export function buildEpubOptions(
   };
 }
 
-function embedImagesAsDataUris(
-  html: string,
-  images: readonly ProcessedImage[]
-): string {
+function embedImagesAsDataUris(html: string, images: readonly ProcessedImage[]): string {
   let result = html;
   for (const img of images) {
     const base64 = img.data.toString("base64");
@@ -133,9 +126,7 @@ export async function buildPdf(
     const moduleName = "puppeteer";
     puppeteer = await import(/* webpackIgnore: true */ moduleName);
   } catch {
-    throw new Error(
-      "PDF generation requires Puppeteer. Install it with: npm install puppeteer"
-    );
+    throw new Error("PDF generation requires Puppeteer. Install it with: npm install puppeteer");
   }
 
   const fullHtml = `<!DOCTYPE html>

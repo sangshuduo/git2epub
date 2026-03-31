@@ -3,12 +3,7 @@ import { join, relative, dirname, basename, extname } from "path";
 import { existsSync } from "fs";
 import { loadConfigFile } from "../config.js";
 import { detectLanguage } from "../utils/language.js";
-import type {
-  BookConfig,
-  Chapter,
-  BookMetadata,
-  DiscoveryResult,
-} from "../types.js";
+import type { BookConfig, Chapter, BookMetadata, DiscoveryResult } from "../types.js";
 
 const EXCLUDED_FILES = new Set([
   "readme.md",
@@ -41,10 +36,7 @@ export async function discoverChapters(
   return { chapters, metadata };
 }
 
-async function chaptersFromConfig(
-  repoDir: string,
-  paths: readonly string[]
-): Promise<Chapter[]> {
+async function chaptersFromConfig(repoDir: string, paths: readonly string[]): Promise<Chapter[]> {
   const chapters: Chapter[] = [];
   for (let i = 0; i < paths.length; i++) {
     const filePath = join(repoDir, paths[i]);
@@ -103,10 +95,7 @@ async function chaptersFromFilesystem(repoDir: string): Promise<Chapter[]> {
   return chapters;
 }
 
-async function findMarkdownFiles(
-  dir: string,
-  repoRoot: string
-): Promise<string[]> {
+async function findMarkdownFiles(dir: string, repoRoot: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
   const files: string[] = [];
   for (const entry of entries) {
@@ -174,9 +163,7 @@ async function resolveMetadata(
   return { title, author, language, cover };
 }
 
-function stripUndefined<T extends Record<string, unknown>>(
-  obj: T
-): Partial<T> {
+function stripUndefined<T extends Record<string, unknown>>(obj: T): Partial<T> {
   const result: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(obj)) {
     if (value !== undefined) {
