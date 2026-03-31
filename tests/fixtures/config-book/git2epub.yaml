@@ -1,0 +1,6 @@
+title: "Config Book"
+author: "Test Author"
+language: en
+chapters:
+  - second.md
+  - first.md
