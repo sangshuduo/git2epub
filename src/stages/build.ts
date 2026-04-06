@@ -3,7 +3,8 @@ import { writeFile } from "fs/promises";
 import type { ParsedChapter, BookMetadata, ProcessedImage } from "../types.js";
 
 const HIGHLIGHT_CSS = `
-.hljs{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto}
+pre code.hljs{display:block;background:transparent;padding:0;border-radius:0;overflow:visible}
+code.hljs{background:#f6f8fa}
 .hljs-keyword,.hljs-selector-tag{color:#d73a49}
 .hljs-string,.hljs-attr{color:#032f62}
 .hljs-comment{color:#6a737d}
@@ -18,9 +19,10 @@ h1,h2,h3{font-family:sans-serif;margin-top:1.5em}
 h1{font-size:1.8em;border-bottom:1px solid #eee;padding-bottom:0.3em}
 h2{font-size:1.4em}
 h3{font-size:1.2em}
-pre{background:#f6f8fa;padding:1em;border-radius:6px;overflow-x:auto;font-size:0.9em}
+pre{background:#f6f8fa;padding:1em;border-radius:6px;font-size:0.85em;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:break-word}
+pre code{font-size:1em;line-height:1.4;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:break-word}
 code{font-family:monospace;font-size:0.9em}
-p code{background:#f0f0f0;padding:0.2em 0.4em;border-radius:3px}
+p code,li code{background:#f0f0f0;padding:0.1em 0.3em;border-radius:3px}
 img{max-width:100%;height:auto}
 blockquote{border-left:4px solid #ddd;margin-left:0;padding-left:1em;color:#555}
 table{border-collapse:collapse;width:100%}
